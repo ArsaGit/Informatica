@@ -15,24 +15,38 @@ namespace Informatica
                 'e','f','g','h','i','j','k','l','m','n'
             };
 
-            Console.WriteLine("Введите CC числа:");
-            int ccBefore = GetCC();
+            //Console.WriteLine("Введите CC числа:");
+            //int ccBefore = GetInt();
 
-            string numberBefore = GetNumber(ccBefore,alphabet);
+            //string numberBefore = GetNumber(ccBefore,alphabet);
 
-            Console.WriteLine("Введите CC в которую переводится число:");
-            int ccAfter = GetCC();
+            //Console.WriteLine("Введите CC в которую переводится число:");
+            //int ccAfter = GetInt();
 
-            string numberAfter = ConvertToRequiredCC(ccBefore, ccAfter, numberBefore, alphabet);
-            Console.WriteLine($"{numberBefore} в {ccBefore} = {numberAfter} в {ccAfter}");
+            //string numberAfter = ConvertToRequiredCC(ccBefore, ccAfter, numberBefore, alphabet);
+            //Console.WriteLine($"{numberBefore} в {ccBefore} = {numberAfter} в {ccAfter}");
+
+
+
+            //Console.WriteLine("Введите CC числа:");
+            //int ccBefore = GetInt();
+
+            //string numberBefore = GetNumber(ccBefore, alphabet);
+            //string numberAfter = ConvertToRomanNumerals(ccBefore, numberBefore, alphabet);
+            //Console.WriteLine(numberAfter);
+
+
+
+            float num = GetFloat();
+
         }
-        static int GetCC()
+        static int GetInt(int x0=2,int x1=50)
         {
             while(true)
             {
                 string cc = Console.ReadLine();
                 int num;
-                if (Int32.TryParse(cc,out num) && num>1&&num<51) return num;
+                if (Int32.TryParse(cc,out num) && num>=x0&&num<=x1) return num;
             }
         }
         static string GetNumber(int cc,char[] alphabet)
@@ -102,6 +116,48 @@ namespace Informatica
                 numberStr += alphabet[numberAfter[i]];
             return numberStr;
         }
+
+        static string ConvertToRomanNumerals(int ccBefore,string numberBefore,char[] alphabet)
+        {
+            
+            int number10CC = ConvertTo10CC(ccBefore, numberBefore, alphabet);
+            string numberAfter = "";
+            int del=1000;
+            for(int i=6;i>=0;i-=2)
+            {
+                int n = number10CC / del;
+                if(n!=0)numberAfter += GetRomanNumber(n,i);
+                number10CC = number10CC % del;
+                del /= 10;
+            }
+            return numberAfter;
+        }
+        static string GetRomanNumber(int number,int index)
+        {
+            string[] rNs = { "I", "V", "X", "L", "C", "D", "M", "Ú" };
+            string romanN="";
+            if (number == 1) romanN = romanN + rNs[index];
+            if (number == 2) romanN = romanN + rNs[index] + rNs[index];
+            if (number == 3) romanN = romanN + rNs[index] + rNs[index] + rNs[index];
+            if (number == 4) romanN = romanN + rNs[index]+rNs[index+1];
+            if (number == 5) romanN = romanN + rNs[index+1];
+            if (number == 6) romanN = romanN + rNs[index+1]+rNs[index];
+            if (number == 7) romanN = romanN + rNs[index+1]+ rNs[index] + rNs[index];
+            if (number == 8) romanN = romanN + rNs[index+1] + rNs[index] + rNs[index] + rNs[index];
+            if (number == 9) romanN = romanN + rNs[index]+rNs[index+2];
+            return romanN;
+        }
+
+        static float GetFloat()
+        {
+            while (true)
+            {
+                string str = Console.ReadLine();
+                float num;
+                if (float.TryParse(str, out num)) return num;
+            }
+        }
+
 
     }
 }
