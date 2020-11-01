@@ -18,7 +18,7 @@ namespace Informatica
             //float num = GetFloat();
             //Console.WriteLine(num);
 
-            //ConvertNumberToRequiredCC();
+            ConvertNumberToRequiredCC();
 
             Table t= new Table { };
             t.ShowTable();

@@ -31,12 +31,13 @@ namespace Informatica
 
 
 
-            WriteBoxLine('┌', '┬', '─', '┐', 0);
-            for (int i = 1; i <= boxHeight; i++)
+            CreateIndent('\n', spaceUp);
+            WriteBoxLine('┌', '─', '┬', '┐');
+            for (int i = 0; i < boxHeight; i++)
             {
-                WriteBoxLine('│', ' ', '│',i);
-                if (i == boxHeight - 1) WriteBoxLine('└',  '┴', '─', '┘',i);
-                else WriteBoxLine('├', '┼', '─', '┤',i);
+                WriteBoxLine('│', ' ', '│');
+                if (i == boxHeight - 1) WriteBoxLine('└', '─', '┴', '┘');
+                else WriteBoxLine('├', '─', '┼', '┤');
             }
         }
         //для однотипных выводов
@@ -45,28 +46,30 @@ namespace Informatica
             for (int i = 0; i < num; i++)
                 Console.Write(ch);
         }
-        public void WriteBoxLine(char beginSym,char wallSym,char filler,char endSym,int row)
+        public void WriteBoxLine(char beginSym,char filler, char wallSym, char endSym)
         {
-            Console.SetCursorPosition(spaceLeft, spaceUp+row*(cellHeight+1));
+            CreateIndent(' ', spaceLeft);
             Console.Write(beginSym);
             for (int i = 0; i < boxWidth; i++)
             {
-                CreateIndent(filler, cellWidth);
+                CreateIndent(filler, cellWidth);    //заполнение клетки
                 if (i == boxWidth - 1) Console.Write(endSym);
                 else Console.Write(wallSym);
             }
+            Console.Write('\n');
         }
-        public void WriteBoxLine(char beginSym,char filler,char endSym,int row)
+        public void WriteBoxLine(char beginSym,char filler,char endSym)
         {
-            for (int j = 0; j < cellHeight; j++)
+            for (int i = 0; i < cellHeight; i++)
             {
-                Console.SetCursorPosition(spaceLeft, spaceUp + row * (cellHeight + 1)+1+j);
+                CreateIndent(' ', spaceLeft);
                 Console.Write(beginSym);
-                for (int i = 0; i < boxWidth; i++)
+                for (int j = 0; j < boxWidth; j++)
                 {
-                    CreateIndent(filler, cellWidth);
+                    CreateIndent(filler, cellWidth);    //заполнение клетки
                     Console.Write(endSym);
                 }
+                Console.Write('\n');
             }
         }
 
