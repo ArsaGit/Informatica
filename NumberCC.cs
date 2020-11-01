@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using System.Text;
 
 namespace Informatica
@@ -21,8 +22,11 @@ namespace Informatica
         public string romanNumber="";
 
         
+        
 
-        public void GetInfo()
+        
+
+        public void GetInfoCC()
         {
             GetCCBefore();
             GetNumberBefore();
@@ -127,7 +131,7 @@ namespace Informatica
             if (count == number.Length) return true;
             else return false;
         }
-        static string GetRomanNumber(int number, int index)
+        public static string GetRomanNumber(int number, int index)
         {
             string[] rNs = { "I", "V", "X", "L", "C", "D", "M", "Ú" };
             string romanN = "";
@@ -145,8 +149,8 @@ namespace Informatica
 
 
 
-
-
         
+        
+
     }
 }
